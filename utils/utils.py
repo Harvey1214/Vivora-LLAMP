@@ -85,13 +85,45 @@ def get_features(seqs):
     
     return np.concatenate((features1, features2, features3, features4))
 
-def get_genome_feature_from_file(file_path):
-    from Bio import SeqIO
+def _parse_fasta(file_path):
+    """Yield (description, sequence) records from a FASTA file.
 
+    Prefers Biopython when available, otherwise falls back to a dependency-free
+    reader so the genome route works even without Bio.SeqIO installed. Both paths
+    feed identical sequence strings into get_features, keeping new-species vectors
+    constructed the same way as the pre-computed training-species features.
+    """
+    try:
+        from Bio import SeqIO
+    except ImportError:
+        SeqIO = None
+
+    if SeqIO is not None:
+        for seq_record in SeqIO.parse(file_path, 'fasta'):
+            yield seq_record.description, str(seq_record.seq)
+        return
+
+    description = None
+    chunks = []
+    with open(file_path, 'r') as fh:
+        for line in fh:
+            line = line.rstrip('\n').rstrip('\r')
+            if line.startswith('>'):
+                if description is not None:
+                    yield description, ''.join(chunks)
+                description = line[1:].strip()
+                chunks = []
+            elif line:
+                chunks.append(line.strip())
+    if description is not None:
+        yield description, ''.join(chunks)
+
+
+def get_genome_feature_from_file(file_path):
     genome_seqs = []
     descriptions = []
-    for seq_record in SeqIO.parse(file_path, 'fasta'):
-        descriptions.append(seq_record.description)
-        genome_seqs.append(seq_record.seq)
+    for description, seq in _parse_fasta(file_path):
+        descriptions.append(description)
+        genome_seqs.append(seq.upper())
 
     return get_features(genome_seqs)
