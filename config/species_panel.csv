@@ -1,0 +1,42 @@
+llamp_id,species,strain,accession,source,assembly_level,role,confidence,file
+Lactobacillus jensenii | SNUV360 | GCF_001936235.1,Lactobacillus jensenii,SNUV360,GCF_001936235.1,RefSeq,Complete Genome,spare,standard,data/Genomic_features/Lactobacillus_jensenii__GCF_001936235_1.fna
+Lactobacillus crispatus | DC21.1 | GCF_009769205.1,Lactobacillus crispatus,DC21.1,GCF_009769205.1,RefSeq,Complete Genome,spare,standard,data/Genomic_features/Lactobacillus_crispatus__GCF_009769205_1.fna
+Lactobacillus gasseri | ATCC 33323 | GCF_000014425.1,Lactobacillus gasseri,ATCC 33323,GCF_000014425.1,RefSeq,Complete Genome,spare,standard,data/Genomic_features/Lactobacillus_gasseri__GCF_000014425_1.fna
+Lactobacillus iners | C0322A1 | GCF_011058775.1,Lactobacillus iners,C0322A1,GCF_011058775.1,RefSeq,Complete Genome,spare,standard,data/Genomic_features/Lactobacillus_iners__GCF_011058775_1.fna
+Gardnerella vaginalis | JCM 11026 | GCF_001042655.1,Gardnerella vaginalis,JCM 11026,GCF_001042655.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_vaginalis__GCF_001042655_1.fna
+Gardnerella vaginalis | ATCC 14019 | GCF_000159155.2,Gardnerella vaginalis,ATCC 14019,GCF_000159155.2,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_vaginalis__GCF_000159155_2.fna
+Gardnerella vaginalis | HMP9231 | GCF_000213955.1,Gardnerella vaginalis,HMP9231,GCF_000213955.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_vaginalis__GCF_000213955_1.fna
+Gardnerella vaginalis | FDAARGOS_568 | GCF_003812765.1,Gardnerella vaginalis,FDAARGOS_568,GCF_003812765.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_vaginalis__GCF_003812765_1.fna
+Gardnerella piotii | GVAR739 | GCF_049815665.1,Gardnerella piotii,GVAR739,GCF_049815665.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_piotii__GCF_049815665_1.fna
+Gardnerella piotii | JNFY15 | GCF_023277585.1,Gardnerella piotii,JNFY15,GCF_023277585.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_piotii__GCF_023277585_1.fna
+Gardnerella piotii | 142-2 | GCF_057626455.1,Gardnerella piotii,142-2,GCF_057626455.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_piotii__GCF_057626455_1.fna
+Gardnerella piotii | 133-2 | GCF_057626475.1,Gardnerella piotii,133-2,GCF_057626475.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_piotii__GCF_057626475_1.fna
+Gardnerella leopoldii | UGent 06.41 | GCF_003293675.1,Gardnerella leopoldii,UGent 06.41,GCF_003293675.1,RefSeq,Chromosome,core,standard,data/Genomic_features/Gardnerella_leopoldii__GCF_003293675_1.fna
+Gardnerella leopoldii | UMB0912 | GCF_002861125.1,Gardnerella leopoldii,UMB0912,GCF_002861125.1,RefSeq,Scaffold,core,standard,data/Genomic_features/Gardnerella_leopoldii__GCF_002861125_1.fna
+Gardnerella leopoldii | UMB0913 | GCF_002861145.1,Gardnerella leopoldii,UMB0913,GCF_002861145.1,RefSeq,Scaffold,core,standard,data/Genomic_features/Gardnerella_leopoldii__GCF_002861145_1.fna
+Gardnerella leopoldii | UMB1489 | GCF_013315195.1,Gardnerella leopoldii,UMB1489,GCF_013315195.1,RefSeq,Scaffold,core,standard,data/Genomic_features/Gardnerella_leopoldii__GCF_013315195_1.fna
+Gardnerella swidsinskii | JNFY3 | GCF_023277705.1,Gardnerella swidsinskii,JNFY3,GCF_023277705.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_swidsinskii__GCF_023277705_1.fna
+Gardnerella swidsinskii | GV37 | GCF_001953155.1,Gardnerella swidsinskii,GV37,GCF_001953155.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Gardnerella_swidsinskii__GCF_001953155_1.fna
+Gardnerella swidsinskii | UMB0411 | GCF_002871635.1,Gardnerella swidsinskii,UMB0411,GCF_002871635.1,RefSeq,Scaffold,core,standard,data/Genomic_features/Gardnerella_swidsinskii__GCF_002871635_1.fna
+Gardnerella swidsinskii | UMB0170 | GCF_002884855.2,Gardnerella swidsinskii,UMB0170,GCF_002884855.2,RefSeq,Scaffold,core,standard,data/Genomic_features/Gardnerella_swidsinskii__GCF_002884855_2.fna
+Prevotella bivia | DSM 20514 | GCF_000262545.1,Prevotella bivia,DSM 20514,GCF_000262545.1,RefSeq,Scaffold,core,standard,data/Genomic_features/Prevotella_bivia__GCF_000262545_1.fna
+Prevotella timonensis | 4401737 = DSM 22865 = JCM 15640 | GCF_000455445.1,Prevotella timonensis,4401737 = DSM 22865 = JCM 15640,GCF_000455445.1,RefSeq,Scaffold,core,standard,data/Genomic_features/Prevotella_timonensis__GCF_000455445_1.fna
+Prevotella amnii | CRIS 21A-A | GCF_000177355.1,Prevotella amnii,CRIS 21A-A,GCF_000177355.1,RefSeq,Contig,core,standard,data/Genomic_features/Prevotella_amnii__GCF_000177355_1.fna
+Fannyhessea vaginae | FDAARGOS_934 | GCF_016026575.1,Fannyhessea vaginae,FDAARGOS_934,GCF_016026575.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Fannyhessea_vaginae__GCF_016026575_1.fna
+Mobiluncus curtisii | ATCC 43063 | GCF_000196535.1,Mobiluncus curtisii,ATCC 43063,GCF_000196535.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Mobiluncus_curtisii__GCF_000196535_1.fna
+Megasphaera lornae | UPII 199-6 | GCF_000214495.1,Megasphaera lornae,UPII 199-6,GCF_000214495.1,RefSeq,Contig,core,standard,data/Genomic_features/Megasphaera_lornae__GCF_000214495_1.fna
+Sneathia vaginalis | SN35 | GCF_000973085.1,Sneathia vaginalis,SN35,GCF_000973085.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Sneathia_vaginalis__GCF_000973085_1.fna
+Sneathia vaginalis | CCUG_64370 | GCF_042035775.1,Sneathia vaginalis,CCUG_64370,GCF_042035775.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Sneathia_vaginalis__GCF_042035775_1.fna
+Sneathia vaginalis | WGS1539 | GCF_043161965.1,Sneathia vaginalis,WGS1539,GCF_043161965.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Sneathia_vaginalis__GCF_043161965_1.fna
+Mageeibacillus indolicus | UPII9-5 | GCF_000025225.2,Mageeibacillus indolicus,UPII9-5,GCF_000025225.2,RefSeq,Complete Genome,core,standard,data/Genomic_features/Mageeibacillus_indolicus__GCF_000025225_2.fna
+Dialister micraerophilus | SRR10258546_bin.3_metaWRAP_v1.3_MAG | GCF_947090205.1,Dialister micraerophilus,SRR10258546_bin.3_metaWRAP_v1.3_MAG,GCF_947090205.1,RefSeq,Contig,core,standard,data/Genomic_features/Dialister_micraerophilus__GCF_947090205_1.fna
+Mycoplasma hominis | LBD-4 | GCF_000767725.1,Mycoplasma hominis,LBD-4,GCF_000767725.1,RefSeq,Complete Genome,core,standard,data/Genomic_features/Mycoplasma_hominis__GCF_000767725_1.fna
+Candidatus Lachnocurva vaginae | UAB071 | GCA_011082265.1,Candidatus Lachnocurva vaginae,UAB071,GCA_011082265.1,GenBank,Complete Genome,core,low_MAG,data/Genomic_features/Candidatus_Lachnocurva_vaginae__GCA_011082265_1.fna
+Candidatus Lachnocurva vaginae | SRR16916863_bin.6_metaWRAP_v1.3_MAG | GCA_946997855.1,Candidatus Lachnocurva vaginae,SRR16916863_bin.6_metaWRAP_v1.3_MAG,GCA_946997855.1,GenBank,Contig,core,low_MAG,data/Genomic_features/Candidatus_Lachnocurva_vaginae__GCA_946997855_1.fna
+TM7-H1 | vaginal MAG | CP026537,TM7-H1,vaginal MAG,CP026537,NCBI Nucleotide,sequence record,exploratory,very_low_reduced_genome,data/Genomic_features/TM7_H1__CP026537.fna
+Streptococcus agalactiae | MRI Z2-174 | GCF_949788565.1,Streptococcus agalactiae,MRI Z2-174,GCF_949788565.1,RefSeq,Complete Genome,secondary,standard,data/Genomic_features/Streptococcus_agalactiae__GCF_949788565_1.fna
+Escherichia coli | K-12 substr. MG1655 | GCF_000005845.2,Escherichia coli,K-12 substr. MG1655,GCF_000005845.2,RefSeq,Complete Genome,calibration,standard,data/Genomic_features/Escherichia_coli__GCF_000005845_2.fna
+Enterococcus faecalis | T5 | GCF_000393015.1,Enterococcus faecalis,T5,GCF_000393015.1,RefSeq,Scaffold,secondary,standard,data/Genomic_features/Enterococcus_faecalis__GCF_000393015_1.fna
+Staphylococcus aureus | NCTC 8325 | GCF_000013425.1,Staphylococcus aureus,NCTC 8325,GCF_000013425.1,RefSeq,Complete Genome,calibration,standard,data/Genomic_features/Staphylococcus_aureus__GCF_000013425_1.fna
+Pseudomonas aeruginosa | PAO1 | GCF_000006765.1,Pseudomonas aeruginosa,PAO1,GCF_000006765.1,RefSeq,Complete Genome,calibration,standard,data/Genomic_features/Pseudomonas_aeruginosa__GCF_000006765_1.fna
+Klebsiella pneumoniae | HS11286 | GCF_000240185.1,Klebsiella pneumoniae,HS11286,GCF_000240185.1,RefSeq,Complete Genome,calibration,standard,data/Genomic_features/Klebsiella_pneumoniae__GCF_000240185_1.fna

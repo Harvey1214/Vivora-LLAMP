@@ -1,49 +1,140 @@
-# AI-Guided Discovery and Optimization of Antimicrobial Peptides Through Species-Aware Language Model
+# LLAMP vaginal peptide screen
 
-## Abstract
-The rise of antibiotic-resistant bacteria drives an urgent need for novel antimicrobial agents. Antimicrobial peptides (AMPs) show promise due to their multiple mechanisms of action and reduced propensity for resistance development. Here we present LLAMP (Large Language model for AMP activity prediction), a target species-aware AI model that leverages pre-trained language models to predict minimum inhibitory concentration (MIC) values of AMPs. Through screening approximately 5.5 million peptide sequences, we identified peptides 13 and 16 as the most selective and most potent candidates, respectively. Analysis of attention values allowed us to pinpoint critical amino acid residues (e.g., Trp, Lys, and Phe). Using this information, we enhanced the amphipathicity of peptide 13  through targeted modifications, yielding peptide 13-5 with the highest antimicrobial activity among the variants. Notably, peptides 13-5 and 16 demonstrated antimicrobial potency and selectivity comparable to the clinically investigated AMP pexiganan. Our work demonstrates AI's potential to accelerate peptide-based antibiotic discovery.
+This project uses the species-aware LLAMP model to predict peptide MICs against
+a pinned panel of vaginal commensals, BV-associated organisms, secondary
+pathogens, and calibration species.
 
-## Model weight
-You can use peptide tuned ESM-2 model weight here.
+`main.py` is the only supported entry point. The notebook in
+`examples/legacy/` is retained for historical reference and is not part of the
+current workflow.
+
+Predictions for organisms outside LLAMP's training distribution are screening
+signals for prioritization, not experimentally validated MIC measurements.
+
+## Project layout
+
+```text
+main.py                         Main command-line program
+config/species_panel.csv        Species, strains, accessions, and analysis roles
+data/candidates/current.csv     Default peptide input
+data/Genomic_features/          Genome FASTAs and LLAMP's stored genome features
+model_weight/LLAMP.pth          LLAMP model weight (download separately)
+results/current/                Results from the latest run
+results/archive/                Preserved historical result CSVs
+examples/legacy/Inference.ipynb Archived exploratory notebook
+utils/                          LLAMP model, tokenizer, and genome feature code
+```
+
+## Installation
+
+Python 3.9 is recommended.
+
+```bash
+conda create -n LLAMP python=3.9.13
+conda activate LLAMP
+pip install -r requirements.txt
+```
+
+Download the LLAMP weight and save it as `model_weight/LLAMP.pth`:
+
+https://drive.google.com/file/d/1hmfL7uRZsHo4pn0o0nqaqPcntxGJIhE7/view
+
+The peptide-tuned ESM-2 files are obtained from:
 
 https://huggingface.co/Daehun/peptide_tuned_ESM-2
 
-You can download LLAMP model weight here.
+The screen runs offline by default, so ESM-2 must already be in the Hugging Face
+cache. On the first run, pass `--online` to allow Transformers to download it.
 
-https://drive.google.com/file/d/1hmfL7uRZsHo4pn0o0nqaqPcntxGJIhE7/view?usp=sharing
+## Quick start
 
-## Model Implementation
-The model implemented for the AMP MIC prediction in inference.ipynb.
+From the repository root:
 
+```bash
+# Download only genomes that are not already present
+python main.py genomes
+
+# Run the default candidate file against the complete panel
+python main.py screen
 ```
-# environment setting
-$ git clone https://github.com/GIST-CSBL/LLAMP.git
 
-$ cd LLAMP
+On Windows, if `python` does not select the LLAMP environment:
 
-$ conda create -n LLAMP python==3.9.13
-
-$ conda activate LLAMP
-
-$ pip install -r requirement.txt
-
-$ pip install ipykernel
-
-$ python -m ipykernel install --user --name LLAMP --display-name "LLAMP"
+```powershell
+& "C:\Users\<user>\anaconda3\envs\LLAMP\python.exe" "main.py" screen
 ```
+
+Run `python main.py --help` or `python main.py screen --help` for all options.
+Useful examples:
+
+```bash
+python main.py screen --candidates my_candidates.csv
+python main.py screen --device cpu --batch-size 16
+python main.py screen --output results/experiment_01
+```
+
+## Candidate input
+
+The candidate CSV must contain a `Sequence` column. Sequences are converted to
+uppercase; empty, duplicate, or non-standard amino-acid sequences are removed.
+Other columns are preserved when relevant. The default input is:
+
+`data/candidates/current.csv`
+
+Use `--candidates PATH` to screen another file.
+
+## Species panel
+
+All tested organisms are specified explicitly in:
+
+`config/species_panel.csv`
+
+Each row is one genome presented to LLAMP as a distinct target. Important
+columns are:
+
+- `species`, `strain`, `accession`: biological and NCBI identity;
+- `role`: how the organism is used in analysis;
+- `confidence`: interpretation warning for unusual genomes or MAGs;
+- `file`: expected local FASTA path.
+
+Roles:
+
+- `spare`: protective Lactobacillus species; high MIC is preferred;
+- `core`: BV-associated targets used in the selectivity score;
+- `exploratory`: highly out-of-distribution organisms reported separately;
+- `secondary`: successor/opportunistic pathogens reported separately;
+- `calibration`: in-distribution species used to verify feature extraction.
+
+To change the panel, edit the CSV using exact NCBI accessions, then run
+`python main.py genomes`. Multiple strains of one species are aggregated before
+the species-level score, so they do not receive extra weight.
+
+## Results
+
+`python main.py screen` writes these files to `results/current/`:
+
+- `predictions_by_strain.csv`: every peptide × genome prediction;
+- `predictions_by_species.csv`: strain predictions aggregated by species;
+- `candidate_ranking.csv`: final selectivity ranking;
+- `scramble_control.csv`: sequence-scrambling plausibility control;
+- `descriptor_correlations.csv`: descriptor correlations when available;
+- `calibration.csv`: derived-versus-native feature comparison for anchors.
+
+MIC predictions are in µM and `mic_log_uM` is log10(µM).
+
+The worst-case selectivity score is:
+
+```text
+lowest MIC among must-spare Lactobacillus strains
+-------------------------------------------------
+highest MIC among core BV target strains
+```
+
+Values above 1 indicate the desired direction, but do not establish biological
+selectivity without wet-lab MIC measurements.
 
 ## License
 
-This repository contains materials under two different licenses:
-
-### Code License (PolyForm Noncommercial License 1.0.0)
-All source code in this repository is licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0/), which permits use for non-commercial purposes only.  
-See the [LICENSE](LICENSE) file for full terms.
-
-## Contact
-Daehun Bae (qoeogns09@gm.gist.ac.kr)
-
-Hojung Nam* (hjnam@gist.ac.kr)
-
-*Corresponding Author
+Code is licensed under the
+[PolyForm Noncommercial License 1.0.0](LICENSE).
 

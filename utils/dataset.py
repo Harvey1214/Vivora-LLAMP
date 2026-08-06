@@ -1,36 +1,42 @@
-import numpy as np
-
 import torch
-import torch.nn as nn
 from torch.utils.data import TensorDataset
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 
 from transformers import EsmTokenizer
 
+
 tokenizer = EsmTokenizer.from_pretrained('Daehun/peptide_tuned_ESM-2')
 
-def sequence_to_input(seqs):    
-    input_seqs = []
-    for i in seqs:
-        for j in range(len(i)-1):
-            i = i[:j+j+1]+ ' ' + i[j+j+1:]
-        input_seqs.append(i)
-    
-    inputs = tokenizer.batch_encode_plus(input_seqs, add_special_tokens=True, pad_to_max_length=True)
-    input_ids = torch.tensor(inputs['input_ids'])
-    attention_mask = torch.tensor(inputs['attention_mask'])
-    
-    return input_ids, attention_mask
 
-def data_loader(seqs, genome_feats, label, BATCH_SIZE, NUM_THREADS=0, shuffle=False):
-    input_ids, attention_mask = sequence_to_input(seqs)
-    dataset = TensorDataset(input_ids, attention_mask, genome_feats, label)
-    loader = DataLoader(dataset=dataset, batch_size=BATCH_SIZE, num_workers=NUM_THREADS, shuffle=shuffle)
-    
-    return loader
+def sequence_to_input(sequences):
+    """Tokenize peptide sequences with one amino acid per ESM token."""
+    spaced_sequences = [' '.join(sequence) for sequence in sequences]
+    inputs = tokenizer.batch_encode_plus(
+        spaced_sequences,
+        add_special_tokens=True,
+        padding=True,
+        return_tensors='pt',
+    )
+    return inputs['input_ids'], inputs['attention_mask']
 
-def get_features(data, feature_dic):
-    encoded = []
-    for token in data:
-        encoded.append(torch.as_tensor(feature_dic[token][0], dtype=torch.float32))
+
+def data_loader(sequences, genome_features, labels, BATCH_SIZE,
+                NUM_THREADS=0, shuffle=False):
+    """Build the inference/training DataLoader expected by LLAMP."""
+    input_ids, attention_mask = sequence_to_input(sequences)
+    tensors = TensorDataset(input_ids, attention_mask, genome_features, labels)
+    return DataLoader(
+        dataset=tensors,
+        batch_size=BATCH_SIZE,
+        num_workers=NUM_THREADS,
+        shuffle=shuffle,
+    )
+
+
+def get_features(target_ids, feature_dictionary):
+    """Return the first stored genome feature vector for each target ID."""
+    encoded = [
+        torch.as_tensor(feature_dictionary[target_id][0], dtype=torch.float32)
+        for target_id in target_ids
+    ]
     return torch.stack(encoded)
