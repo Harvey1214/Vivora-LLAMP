@@ -38,6 +38,12 @@ PANEL_COLUMNS = {
 }
 STANDARD_AA = set("ACDEFGHIKLMNPQRSTVWY")
 META_COLUMNS = ["Novelty", "pct", "Selectivity_Score", "Length"]
+# Candidate-file columns that are upstream design metrics, not LLAMP output. They
+# are prefixed on export so they cannot be mistaken for the selectivity computed here.
+UPSTREAM_META_COLUMNS = {"Selectivity_Score", "Novelty", "pct"}
+# A predicted BV MIC above this value is too weak to be a credible therapeutic
+# starting point, so a candidate is flagged regardless of how selective it looks.
+BV_POTENCY_THRESHOLD_UM = 32.0
 
 
 def project_path(value):
@@ -282,11 +288,26 @@ def aggregate_predictions(pd, results, candidates):
     ranking["selectivity_typical_case"] = (
         ranking["lactobacillus_typical_case_uM"] / ranking["bv_typical_case_uM"]
     )
+    # Spare the hardest Lactobacillus (lowest MIC) relative to typical BV potency.
+    # Prefer this when protecting lactobacilli matters more than covering every BV strain.
+    ranking["min_spare_over_typical_kill"] = (
+        ranking["lactobacillus_worst_case_uM"] / ranking["bv_typical_case_uM"]
+    )
+    ranking["bv_potency_warning"] = (
+        ranking["bv_typical_case_uM"] > BV_POTENCY_THRESHOLD_UM
+    )
     metadata = [column for column in META_COLUMNS if column in candidates.columns]
     if metadata:
         ranking = ranking.merge(
             candidates[["Sequence"] + metadata], on="Sequence", how="left"
         )
+        rename_map = {
+            column: f"upstream_{column}"
+            for column in metadata
+            if column in UPSTREAM_META_COLUMNS
+        }
+        if rename_map:
+            ranking = ranking.rename(columns=rename_map)
     ranking = ranking.sort_values(
         "selectivity_worst_case", ascending=False
     ).reset_index(drop=True)
@@ -467,11 +488,18 @@ def run_screen(args):
         "Sequence",
         "lactobacillus_worst_case_uM",
         "bv_worst_case_uM",
+        "bv_typical_case_uM",
         "selectivity_worst_case",
-        "selectivity_typical_case",
+        "min_spare_over_typical_kill",
+        "bv_potency_warning",
     ]
     print("\nTop candidates by worst-case selectivity:")
     print(ranking[columns].head(10).to_string(index=False))
+    n_warn = int(ranking["bv_potency_warning"].sum())
+    print(
+        f"\nBV potency warnings (typical BV MIC > {BV_POTENCY_THRESHOLD_UM:g} µM): "
+        f"{n_warn}/{len(ranking)}"
+    )
     print(f"\nScramble control: {int(scramble['pass'].sum())}/{len(scramble)} pass")
     print(f"Results written to: {output_dir}")
 

@@ -1,0 +1,55 @@
+﻿==============================================================================================================
+GENOME IDENTITY AUDIT
+==============================================================================================================
+
+Checked 41 genomes, 1 finding(s)
+
+--- MAG_CONF (1) ---
+  Dialister micraerophilus | SRR10258546_bin.3_metaWRAP_v1.3_MAG | GCF_947090205.1
+      header says MAG but confidence='standard': NZ_CAMUNF010000001.1 MAG: Dialister micraerophilus isolate SRR10258546_bin.3_met
+
+==============================================================================================================
+FULL TABLE: panel vs NCBI
+==============================================================================================================
+llamp_id                                                       NCBI organism                              NCBI strain            lvl                 local bp     ncbi bp    ctg l/n
+Lactobacillus jensenii | SNUV360 | GCF_001936235.1             Lactobacillus jensenii                     SNUV360                Complete Genom     1,672,949   1,672,949        1/1
+Lactobacillus crispatus | DC21.1 | GCF_009769205.1             Lactobacillus crispatus                    DC21.1                 Complete Genom     2,039,404   2,039,404        2/2
+Lactobacillus gasseri | ATCC 33323 | GCF_000014425.1           Lactobacillus gasseri ATCC 33323 = JCM 1   ATCC 33323             Complete Genom     1,894,360   1,894,360        1/1
+Lactobacillus iners | C0322A1 | GCF_011058775.1                Lactobacillus iners                        C0322A1                Complete Genom     1,318,700   1,318,700        1/1
+Gardnerella vaginalis | JCM 11026 | GCF_001042655.1            Gardnerella vaginalis ATCC 14018 = JCM 1   JCM 11026              Complete Genom     1,667,406   1,667,406        1/1
+Gardnerella vaginalis | ATCC 14019 | GCF_000159155.2           Gardnerella vaginalis ATCC 14019           ATCC 14019             Complete Genom     1,667,350   1,667,350        1/1
+Gardnerella vaginalis | HMP9231 | GCF_000213955.1              Gardnerella vaginalis HMP9231              HMP9231                Complete Genom     1,726,519   1,726,519        1/1
+Gardnerella vaginalis | FDAARGOS_568 | GCF_003812765.1         Gardnerella vaginalis                      FDAARGOS_568           Complete Genom     1,716,590   1,716,590        1/1
+Gardnerella piotii | GVAR739 | GCF_049815665.1                 Gardnerella piotii                         GVAR739                Complete Genom     1,518,345   1,518,345        1/1
+Gardnerella piotii | JNFY15 | GCF_023277585.1                  Gardnerella piotii                         JNFY15                 Complete Genom     1,541,442   1,541,442        1/1
+Gardnerella piotii | 142-2 | GCF_057626455.1                   Gardnerella piotii                         142-2                  Complete Genom     1,570,172   1,570,172        1/1
+Gardnerella piotii | 133-2 | GCF_057626475.1                   Gardnerella piotii                         133-2                  Complete Genom     1,511,382   1,511,382        1/1
+Gardnerella leopoldii | UGent 06.41 | GCF_003293675.1          Gardnerella leopoldii                      UGent 06.41            Chromosome         1,563,545   1,563,545        1/1
+Gardnerella leopoldii | UMB0912 | GCF_002861125.1              Gardnerella leopoldii                      UMB0912                Scaffold           1,513,749   1,513,749        4/4
+Gardnerella leopoldii | UMB0913 | GCF_002861145.1              Gardnerella leopoldii                      UMB0913                Scaffold           1,513,612   1,513,612        4/4
+Gardnerella leopoldii | UMB1489 | GCF_013315195.1              Gardnerella leopoldii                      UMB1489                Scaffold           1,492,090   1,492,090        4/4
+Gardnerella swidsinskii | JNFY3 | GCF_023277705.1              Gardnerella swidsinskii                    JNFY3                  Complete Genom     1,602,355   1,602,355        1/1
+Gardnerella swidsinskii | GV37 | GCF_001953155.1               Gardnerella swidsinskii                    GV37                   Complete Genom     1,746,718   1,746,718        1/1
+Gardnerella swidsinskii | UMB0411 | GCF_002871635.1            Gardnerella swidsinskii                    UMB0411                Scaffold           1,559,824   1,559,824        5/5
+Gardnerella swidsinskii | UMB0170 | GCF_002884855.2            Gardnerella swidsinskii                    UMB0170                Scaffold           1,507,368   1,507,368        4/4
+Prevotella bivia | DSM 20514 | GCF_000262545.1                 Prevotella bivia DSM 20514                 DSM 20514              Scaffold           2,521,238   2,521,238        3/3
+Prevotella timonensis | 4401737 = DSM 22865 = JCM 15640 | GC   Hoylesella timonensis 4401737 = DSM 2286   4401737 = DSM 22865    Scaffold           3,217,068   3,217,068      25/25
+Prevotella amnii | CRIS 21A-A | GCF_000177355.1                Prevotella amnii CRIS 21A-A                CRIS 21A-A             Contig             2,415,558   2,415,558    117/117
+Fannyhessea vaginae | FDAARGOS_934 | GCF_016026575.1           Fannyhessea vaginae                        FDAARGOS_934           Complete Genom     1,447,017   1,447,017        1/1
+Mobiluncus curtisii | ATCC 43063 | GCF_000196535.1             Mobiluncus curtisii ATCC 43063             ATCC 43063             Complete Genom     2,146,480   2,146,480        1/1
+Megasphaera lornae | UPII 199-6 | GCF_000214495.1              Megasphaera lornae                         UPII 199-6             Contig             1,640,787   1,640,787      45/45
+Sneathia vaginalis | SN35 | GCF_000973085.1                    Sneathia vaginalis                         SN35                   Complete Genom     1,330,224   1,330,224        1/1
+Sneathia vaginalis | CCUG_64370 | GCF_042035775.1              Sneathia vaginalis                         CCUG_64370             Complete Genom     1,321,587   1,321,587        1/1
+Sneathia vaginalis | WGS1539 | GCF_043161965.1                 Sneathia vaginalis                         WGS1539                Complete Genom     1,347,888   1,347,888        1/1
+Mageeibacillus indolicus | UPII9-5 | GCF_000025225.2           Mageeibacillus indolicus UPII9-5           UPII9-5                Complete Genom     1,809,746   1,809,746        1/1
+Dialister micraerophilus | SRR10258546_bin.3_metaWRAP_v1.3_M   Dialister micraerophilus                   SRR10258546_bin.3_me   Contig             1,234,903   1,234,903      14/14
+Mycoplasma hominis | LBD-4 | GCF_000767725.1                   Metamycoplasma hominis ATCC 27545          LBD-4                  Complete Genom       715,165     715,165        1/1
+Candidatus Lachnocurva vaginae | UAB071 | GCA_011082265.1      Candidatus Lachnocurva vaginae             UAB071                 Complete Genom     1,649,642   1,649,642        1/1
+Candidatus Lachnocurva vaginae | SRR16916863_bin.6_metaWRAP_   uncultured Lachnospiraceae bacterium       SRR16916863_bin.6_me   Contig             1,734,492   1,734,492      24/24
+TM7-H1 | vaginal MAG | CP026537                                Candidatus Saccharibacteria genomosp. TM                          sequence recor       723,184     723,184        1/1
+Streptococcus agalactiae | MRI Z2-174 | GCF_949788565.1        Streptococcus agalactiae                   MRI Z2-174             Complete Genom     2,015,582   2,015,582        2/2
+Escherichia coli | K-12 substr. MG1655 | GCF_000005845.2       Escherichia coli str. K-12 substr. MG165   K-12 substr. MG1655    Complete Genom     4,641,652   4,641,652        1/1
+Enterococcus faecalis | T5 | GCF_000393015.1                   Enterococcus faecalis EnGen0336            T5                     Scaffold           2,870,381   2,870,381        3/3
+Staphylococcus aureus | NCTC 8325 | GCF_000013425.1            Staphylococcus aureus subsp. aureus NCTC   NCTC 8325              Complete Genom     2,821,361   2,821,361        1/1
+Pseudomonas aeruginosa | PAO1 | GCF_000006765.1                Pseudomonas aeruginosa PAO1                PAO1                   Complete Genom     6,264,404   6,264,404        1/1
+Klebsiella pneumoniae | HS11286 | GCF_000240185.1              Klebsiella pneumoniae subsp. pneumoniae    HS11286                Complete Genom     5,682,322   5,682,322        7/7

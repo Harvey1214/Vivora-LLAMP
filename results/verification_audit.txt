@@ -1,0 +1,91 @@
+# Verification audit findings (2026-08-06)
+
+Scope: genome identity (E), MIC plumbing (B), selectivity math (C),
+proxy/archive artifacts (C4/C5), and science-signoff notes (A).
+
+Canonical code path: `main.py` + `config/species_panel.csv`.
+Legacy notebook: `examples/legacy/Inference.ipynb` (historical only).
+
+------------------------------------------------------------------------------
+E. Genome identity — PASS (1 follow-up)
+------------------------------------------------------------------------------
+Checked all 41 panel genomes against NCBI Datasets / E-utilities
+(audit_genomes_tmp.json + audit_report_tmp.py).
+
+- FASTA sequence accessions ⊆ assembly sequence reports for every RefSeq row
+- Local base counts match NCBI assembly lengths
+- Manifest accessions match returned NCBI accessions
+- Sneathia early flag RESOLVED: panel correctly lists Sneathia vaginalis;
+  NCBI organism matches (former "S. amnii" search was the old mislabel)
+- Stand-ins are explicit species, not "spp." filenames:
+  Mobiluncus curtisii, Megasphaera lornae, Sneathia vaginalis
+- Taxonomy renames (accepted): Prevotella timonensis → Hoylesella timonensis;
+  Mycoplasma hominis → Metamycoplasma hominis
+
+Finding fixed:
+- Dialister micraerophilus MAG (GCF_947090205.1): confidence set to low_MAG
+  (FASTA header is a MAG; was incorrectly standard).
+
+You (E5): spot-check 2–3 high-stakes accessions on NCBI yourself
+(e.g. G. vaginalis JCM 11026, L. crispatus DC21.1, S. vaginalis SN35).
+
+------------------------------------------------------------------------------
+B. MIC prediction plumbing — PASS
+------------------------------------------------------------------------------
+B1 Tokenization: dataset.sequence_to_input uses ' '.join(seq). Matches original
+   LLAMP spacing algorithm for all 123 current candidates (0 mismatches).
+B2 mic_uM = 10**mic_log_uM: max abs error 3.8e-5 on 5043 strain predictions.
+B3 Genome inject: main.inject_genome_features asserts 340-d + unit block norms;
+   keys are llamp_id (strain-level). Calibration vs native LLAMP features for
+   E. coli / S. aureus / P. aeruginosa / K. pneumoniae: delta_log_uM all 0.0.
+B4 Notebook parity: notebook is archived. Screen logic lives in main.py only.
+   Do not use notebook outputs as current truth.
+B5 Demo get_inputs in legacy notebook is NOT the screen path (different
+   tokenization risk). Irrelevant to main.py.
+B6 load_state_dict(..., strict=False): missing_keys=[]; unexpected_keys=
+   ['bert.embeddings.position_ids'] only (benign buffer).
+
+------------------------------------------------------------------------------
+C. Selectivity / ranking math — PASS
+------------------------------------------------------------------------------
+Independent recompute from results/current/predictions_by_strain.csv matched
+candidate_ranking.csv (max selectivity delta ~1e-7). Sort is selectivity_worst_case
+descending. Roles: spare = 4 Lactobacillus; core = 15 BV-associated; no overlap.
+Multi-strain species aggregated before scoring (no extra weight from strain count).
+
+Code updates applied in main.py (re-run screen to refresh CSVs):
+- min_spare_over_typical_kill = lactobacillus_worst / bv_typical
+- bv_potency_warning when bv_typical_case_uM > 32
+- upstream_* rename for Selectivity_Score / Novelty / pct
+
+On current results: 31/123 peptides have typical BV MIC > 32 µM.
+Top-10 by new A3 metric overlaps 6/10 with worst-case ranking — metrics differ.
+Scramble control: 3/5 pass on top peptides (2 failures; triage signal only).
+
+------------------------------------------------------------------------------
+C4/C5. Proxy route and artifacts — DOCUMENTED
+------------------------------------------------------------------------------
+Proxy artifacts in results/archive/ are HISTORICAL only:
+- mic_predictions.csv / selectivity_ranking.csv: 22 peptides, incomplete panel,
+  Gardnerella has 2 proxy rows per peptide (double-count risk in typical means)
+- selectivity_ranking_genome.csv: older single-genome-per-species schema
+- Canonical: data/candidates/current.csv (123) → python main.py screen →
+  results/current/
+
+Do not mix Selectivity_Score (upstream design metadata) with LLAMP selectivity.
+
+------------------------------------------------------------------------------
+A. Science sign-off (from your plan annotations + remaining items)
+------------------------------------------------------------------------------
+A1 Panel is now 4 Lactobacillus spare + expanded core BV panel (not the old 3+6).
+   Confirm this is still the intended screen.
+A2 Stand-ins accepted as named species above; you confirm after E5 spot-check.
+A3 Decision: keep worst-case ranking; ADD min_spare_over_typical_kill
+   (implemented in main.py — re-run screen).
+A4 Absolute BV MIC gate: bv_potency_warning at 32 µM (implemented — re-run).
+A5 Selectivity_Score is upstream only (prefixed on export after re-run).
+A6 OOD triage caveat accepted.
+
+Remaining for you: E5 NCBI spot-checks; re-run `python main.py screen` to
+refresh results/current with new columns; eyeball top peptides with absolute
+MICs (D3).

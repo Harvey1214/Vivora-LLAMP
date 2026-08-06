@@ -16,7 +16,7 @@ signals for prioritization, not experimentally validated MIC measurements.
 ```text
 main.py                         Main command-line program
 config/species_panel.csv        Species, strains, accessions, and analysis roles
-data/candidates/current.csv     Default peptide input
+data/candidates/current.csv     Default peptide input - peptides for screening
 data/Genomic_features/          Genome FASTAs and LLAMP's stored genome features
 model_weight/LLAMP.pth          LLAMP model weight (download separately)
 results/current/                Results from the latest run
@@ -24,6 +24,8 @@ results/archive/                Preserved historical result CSVs
 examples/legacy/Inference.ipynb Archived exploratory notebook
 utils/                          LLAMP model, tokenizer, and genome feature code
 ```
+
+
 
 ## Installation
 
@@ -37,11 +39,11 @@ pip install -r requirements.txt
 
 Download the LLAMP weight and save it as `model_weight/LLAMP.pth`:
 
-https://drive.google.com/file/d/1hmfL7uRZsHo4pn0o0nqaqPcntxGJIhE7/view
+[https://drive.google.com/file/d/1hmfL7uRZsHo4pn0o0nqaqPcntxGJIhE7/view](https://drive.google.com/file/d/1hmfL7uRZsHo4pn0o0nqaqPcntxGJIhE7/view)
 
 The peptide-tuned ESM-2 files are obtained from:
 
-https://huggingface.co/Daehun/peptide_tuned_ESM-2
+[https://huggingface.co/Daehun/peptide_tuned_ESM-2](https://huggingface.co/Daehun/peptide_tuned_ESM-2)
 
 The screen runs offline by default, so ESM-2 must already be in the Hugging Face
 cache. On the first run, pass `--online` to allow Transformers to download it.
@@ -72,6 +74,8 @@ python main.py screen --candidates my_candidates.csv
 python main.py screen --device cpu --batch-size 16
 python main.py screen --output results/experiment_01
 ```
+
+
 
 ## Candidate input
 
@@ -109,6 +113,23 @@ To change the panel, edit the CSV using exact NCBI accessions, then run
 `python main.py genomes`. Multiple strains of one species are aggregated before
 the species-level score, so they do not receive extra weight.
 
+### Why these genomes
+
+Accessions are **pinned** in the CSV. `python main.py genomes` only downloads
+those IDs; it does not re-pick NCBI's current "reference genome" on each run.
+That keeps fingerprints and rankings reproducible.
+
+Assembly choice prefers **RefSeq** and the highest available assembly level
+(Complete Genome → Chromosome → Scaffold → Contig). That is not the same as
+always using NCBI's single designated reference: for diverse core taxa
+(especially *Gardnerella*), several independent strains are included so one
+atypical genome cannot dominate. Where only a draft or MAG exists for a needed
+species, it is kept and flagged via `confidence` (`low_MAG`,
+`very_low_reduced_genome`) rather than dropped.
+
+Species labels use the names in the panel (including older synonyms such as
+*Prevotella timonensis*); NCBI may show newer names for the same accession.
+
 ## Results
 
 `python main.py screen` writes these files to `results/current/`:
@@ -130,6 +151,13 @@ lowest MIC among must-spare Lactobacillus strains
 highest MIC among core BV target strains
 ```
 
+`candidate_ranking.csv` also includes:
+
+- `selectivity_typical_case`: geometric-mean Lactobacillus MIC / geometric-mean BV MIC
+- `min_spare_over_typical_kill`: lowest Lactobacillus MIC / typical (geomean) BV MIC — useful when sparing lactobacilli matters more than covering every BV strain
+- `bv_potency_warning`: true when typical BV MIC exceeds 32 µM (weak absolute potency despite any selectivity ratio)
+- `upstream_*` columns: design-file metadata such as `Selectivity_Score` (not LLAMP output)
+
 Values above 1 indicate the desired direction, but do not establish biological
 selectivity without wet-lab MIC measurements.
 
@@ -137,4 +165,3 @@ selectivity without wet-lab MIC measurements.
 
 Code is licensed under the
 [PolyForm Noncommercial License 1.0.0](LICENSE).
-
