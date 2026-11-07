@@ -1,0 +1,28 @@
+﻿sep=;
+peptide;bacterium;group;mic_uM;mic_log10_uM;strains_tested;lowest_strain_mic_uM;highest_strain_mic_uM
+graft1;Lactobacillus iners;Lactobacillus (spare);10,710;1,030;1;10,710;10,710
+graft1;Lactobacillus crispatus;Lactobacillus (spare);13,650;1,135;1;13,650;13,650
+graft1;Lactobacillus gasseri;Lactobacillus (spare);13,760;1,138;1;13,760;13,760
+graft1;Lactobacillus jensenii;Lactobacillus (spare);14,100;1,149;1;14,100;14,100
+graft1;Megasphaera lornae;BV-associated;6,840;0,835;1;6,840;6,840
+graft1;Mageeibacillus indolicus;BV-associated;7,270;0,862;1;7,270;7,270
+graft1;Mycoplasma hominis;BV-associated;8,190;0,913;1;8,190;8,190
+graft1;Prevotella bivia;BV-associated;9,170;0,963;1;9,170;9,170
+graft1;Sneathia vaginalis;BV-associated;9,210;0,964;3;9,180;9,250
+graft1;Mobiluncus curtisii;BV-associated;9,320;0,969;1;9,320;9,320
+graft1;Gardnerella swidsinskii;BV-associated;9,460;0,976;4;9,320;9,530
+graft1;Gardnerella leopoldii;BV-associated;9,530;0,979;4;9,410;9,600
+graft1;Gardnerella vaginalis;BV-associated;9,590;0,982;4;9,580;9,600
+graft1;Prevotella timonensis;BV-associated;9,970;0,999;1;9,970;9,970
+graft1;Fannyhessea vaginae;BV-associated;10,090;1,004;1;10,090;10,090
+graft1;Gardnerella piotii;BV-associated;10,180;1,008;4;10,150;10,210
+graft1;Prevotella amnii;BV-associated;12,410;1,094;1;12,410;12,410
+graft1;Dialister micraerophilus;BV-associated;13,820;1,140;1;13,820;13,820
+graft1;Candidatus Lachnocurva vaginae;BV-associated;17,110;1,233;2;16,900;17,330
+graft1;Streptococcus agalactiae;Secondary pathogen;13,230;1,122;1;13,230;13,230
+graft1;Enterococcus faecalis;Secondary pathogen;17,160;1,235;1;17,160;17,160
+graft1;TM7-H1;Exploratory;6,700;0,826;1;6,700;6,700
+graft1;Escherichia coli;Calibration;5,930;0,773;1;5,930;5,930
+graft1;Staphylococcus aureus;Calibration;7,950;0,900;1;7,950;7,950
+graft1;Pseudomonas aeruginosa;Calibration;9,760;0,990;1;9,760;9,760
+graft1;Klebsiella pneumoniae;Calibration;10,030;1,001;1;10,030;10,030

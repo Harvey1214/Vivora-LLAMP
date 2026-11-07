@@ -282,6 +282,7 @@ def aggregate_predictions(pd, results, candidates):
             10 ** core.groupby("Sequence")["species_typical_mic_log_uM"].mean()
         ),
     })
+    ranking = ranking.reset_index()
     ranking["selectivity_worst_case"] = (
         ranking["lactobacillus_worst_case_uM"] / ranking["bv_worst_case_uM"]
     )

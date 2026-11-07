@@ -1,0 +1,2 @@
+Sequence,lactobacillus_worst_case_uM,bv_worst_case_uM,lactobacillus_typical_case_uM,bv_typical_case_uM,selectivity_worst_case,selectivity_typical_case,min_spare_over_typical_kill,bv_potency_warning
+KKRAMFRKMIFKFQFIMMMMDNQLDIKQNK,10.714425,17.33095,12.97777,9.8792515,0.6182249,1.3136389,1.0845381,False
